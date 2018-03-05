@@ -1,0 +1,3 @@
+rootProject.name = 'match'
+include 'match_web'
+include 'match_core'
