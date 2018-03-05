@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
@@ -26,6 +27,7 @@ public interface BaseMapper<T extends MyBatisPojo> {
      * @param record 需要插入的对象
      * @return 插入成功的条数
      */
+    @Options(useGeneratedKeys = true, keyProperty = "keyProperty")   
     @InsertProvider(type = BaseTemplate.class, method = "insert")
     int insert(T record);
 
@@ -34,6 +36,7 @@ public interface BaseMapper<T extends MyBatisPojo> {
      * @param record 需要插入的对象
      * @return 插入成功的条数
      */
+    @Options(useGeneratedKeys = true, keyProperty = "keyProperty")   
     @InsertProvider(type = BaseTemplate.class, method = "insertSelective")
     int insertSelective(T record);
 

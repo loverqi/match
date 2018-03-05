@@ -89,4 +89,12 @@ public class EventRecord extends MyBatisPojo {
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
+
+    /* （非 Javadoc）
+     * @see cn.loverqi.match.mybaties.pojo.MyBatisPojo#setKeyProperty(int)
+     */
+    @Override
+    public void setKeyProperty(Integer keyProperty) {
+        this.id = keyProperty;
+    }
 }
