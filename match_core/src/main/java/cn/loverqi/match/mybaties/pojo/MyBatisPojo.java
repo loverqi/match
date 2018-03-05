@@ -25,13 +25,6 @@ import cn.loverqi.match.mybaties.utils.NameFormatConversionUtil;
 public abstract class MyBatisPojo implements Serializable {
 
     private static final long serialVersionUID = 7017005956368469919L;
-    
-    /**
-     * 在使用自动生成主键的时候的回调方法
-     * @param keyProperty 注入进来的主键值
-     */
-    @JsonIgnore
-    public abstract void setKeyProperty(Integer keyProperty);
 
     /**
      * 获取POJO对应的表名，要求数据库中的表名必须和类名对应
@@ -214,6 +207,15 @@ public abstract class MyBatisPojo implements Serializable {
 
         return true;
 
+    }
+
+    /**
+     * 在使用自动生成主键的时候的回调方法
+     * @param keyProperty 注入进来的主键值
+     */
+    @JsonIgnore
+    public void setKeyProperty(Integer keyProperty) {
+        this.setFieldValueByKey(getTablePrimaryKey(), keyProperty);
     }
 
     @Override

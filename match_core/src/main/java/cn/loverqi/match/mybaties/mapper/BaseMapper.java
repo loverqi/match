@@ -23,22 +23,38 @@ import cn.loverqi.match.mybaties.pojo.MyBatisPojo;
 public interface BaseMapper<T extends MyBatisPojo> {
 
     /**
-     * 插入对象
+     * 插入对象, 不会将自定义主键赋值
+     * @param record 需要插入的对象
+     * @return 插入成功的条数
+     */
+    @InsertProvider(type = BaseTemplate.class, method = "insert")
+    int insert(T record);
+    
+    /**
+     * 插入对象，会将自定义主键赋值
      * @param record 需要插入的对象
      * @return 插入成功的条数
      */
     @Options(useGeneratedKeys = true, keyProperty = "keyProperty")   
     @InsertProvider(type = BaseTemplate.class, method = "insert")
-    int insert(T record);
+    int insertWithGeneratedKeys(T record);
 
     /**
-     *  插入对象，仅插入对象非空的属性
+     *  插入对象，仅插入对象非空的属性, 不会将自定义主键赋值
+     * @param record 需要插入的对象
+     * @return 插入成功的条数
+     */
+    @InsertProvider(type = BaseTemplate.class, method = "insertSelective")
+    int insertSelective(T record);
+    
+    /**
+     *  插入对象，仅插入对象非空的属性, 会将自定义主键赋值
      * @param record 需要插入的对象
      * @return 插入成功的条数
      */
     @Options(useGeneratedKeys = true, keyProperty = "keyProperty")   
     @InsertProvider(type = BaseTemplate.class, method = "insertSelective")
-    int insertSelective(T record);
+    int insertSelectiveWithGeneratedKeys(T record);
 
     /**
      * 根据主键获取对象的方法

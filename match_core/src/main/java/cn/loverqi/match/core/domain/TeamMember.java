@@ -98,12 +98,4 @@ public class TeamMember  extends MyBatisPojo {
     public void setFoul(Integer foul) {
         this.foul = foul;
     }
-    
-    /* （非 Javadoc）
-     * @see cn.loverqi.match.mybaties.pojo.MyBatisPojo#setKeyProperty(int)
-     */
-    @Override
-    public void setKeyProperty(Integer keyProperty) {
-        this.id = keyProperty;
-    }
 }

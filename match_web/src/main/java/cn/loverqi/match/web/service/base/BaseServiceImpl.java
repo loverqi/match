@@ -24,7 +24,7 @@ public abstract class BaseServiceImpl<T extends MyBatisPojo> implements BaseServ
     protected BaseMapper<T> baseMapper;
 
     /**
-     * 插入对象
+     * 插入对象, 不会将自定义主键赋值
      * @param record 需要插入的对象
      * @return 插入成功的条数
      */
@@ -35,7 +35,19 @@ public abstract class BaseServiceImpl<T extends MyBatisPojo> implements BaseServ
     }
 
     /**
-     *  插入对象，仅插入对象非空的属性
+     * 插入对象, 会将自定义主键赋值
+     * @param record 需要插入的对象
+     * @return 插入成功的条数
+     */
+    @Override
+    public int insertWithGeneratedKeys(T record) {
+        int insertWithGeneratedKeys = baseMapper.insertWithGeneratedKeys(record);
+
+        return insertWithGeneratedKeys;
+    }
+
+    /**
+     *  插入对象，仅插入对象非空的属性, 不会将自定义主键赋值
      * @param record 需要插入的对象
      * @return 插入成功的条数
      */
@@ -45,6 +57,18 @@ public abstract class BaseServiceImpl<T extends MyBatisPojo> implements BaseServ
         return insertSelective;
     }
 
+    /**
+     *  插入对象，仅插入对象非空的属性, 会将自定义主键赋值
+     * @param record 需要插入的对象
+     * @return 插入成功的条数
+     */
+    @Override
+    public int insertSelectiveWithGeneratedKeys(T record) {
+        int insertSelectiveWithGeneratedKeys = baseMapper.insertSelectiveWithGeneratedKeys(record);
+
+        return insertSelectiveWithGeneratedKeys;
+    }
+    
     /**
      * 根据主键获取对象的方法
      * @param 对象
